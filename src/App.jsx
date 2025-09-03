@@ -90,13 +90,13 @@ function Calendar({ legend, year }) {
 
   const colors = ["", "yellow", "red", "green", "blue", "purple"];
 
-  // days in a given month
+  // Days in a given month
   const daysInMonth = (monthIndex, year) =>
     new Date(year, monthIndex + 1, 0).getDate();
 
-  // FIXED: make Monday = 0 instead of Sunday = 0
+  // ✅ FIXED: make Monday = 0 instead of Sunday = 0
   const firstDayOfMonth = (monthIndex, year) => {
-    let day = new Date(year, monthIndex, 1).getDay(); // 0 = Sunday, 1 = Monday, ...
+    const day = new Date(year, monthIndex, 1).getDay(); // 0 = Sunday, 1 = Monday, ...
     return (day + 6) % 7; // shift so Monday is first
   };
 
@@ -142,13 +142,15 @@ function Calendar({ legend, year }) {
                     {day}
                   </div>
                 ))}
+
                 {/* Empty slots before first day */}
                 {Array.from({ length: startDay }).map((_, i) => (
                   <div
                     key={`empty-${i}`}
                     style={{ border: "1px solid transparent" }}
-                  ></div>
+                  />
                 ))}
+
                 {/* Days of the month */}
                 {Array.from({ length: days }, (_, i) => (
                   <Day key={i} day={i + 1} colors={colors} />
@@ -179,7 +181,7 @@ function Calendar({ legend, year }) {
                   backgroundColor: color,
                   marginRight: "10px",
                 }}
-              ></div>
+              />
               <span>{legend[i] || `Event ${i + 1}`}</span>
             </li>
           ))}
