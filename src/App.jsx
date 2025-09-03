@@ -90,10 +90,15 @@ function Calendar({ legend, year }) {
 
   const colors = ["", "yellow", "red", "green", "blue", "purple"];
 
+  // days in a given month
   const daysInMonth = (monthIndex, year) =>
     new Date(year, monthIndex + 1, 0).getDate();
-  const firstDayOfMonth = (monthIndex, year) =>
-    new Date(year, monthIndex, 1).getDay();
+
+  // FIXED: make Monday = 0 instead of Sunday = 0
+  const firstDayOfMonth = (monthIndex, year) => {
+    let day = new Date(year, monthIndex, 1).getDay(); // 0 = Sunday, 1 = Monday, ...
+    return (day + 6) % 7; // shift so Monday is first
+  };
 
   return (
     <div style={{ padding: "20px" }}>
@@ -118,7 +123,9 @@ function Calendar({ legend, year }) {
                 borderRadius: "5px",
               }}
             >
-              <h3 style={{ textAlign: "center" }}>{month} {year}</h3>
+              <h3 style={{ textAlign: "center" }}>
+                {month} {year}
+              </h3>
               <div
                 style={{
                   display: "grid",
@@ -126,12 +133,23 @@ function Calendar({ legend, year }) {
                   gap: "2px",
                 }}
               >
+                {/* Weekdays starting on Monday */}
                 {["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map((day) => (
-                  <div key={day} style={{ fontWeight: "bold", textAlign: "center" }}>{day}</div>
+                  <div
+                    key={day}
+                    style={{ fontWeight: "bold", textAlign: "center" }}
+                  >
+                    {day}
+                  </div>
                 ))}
+                {/* Empty slots before first day */}
                 {Array.from({ length: startDay }).map((_, i) => (
-                  <div key={`empty-${i}`} style={{ border: "1px solid transparent" }}></div>
+                  <div
+                    key={`empty-${i}`}
+                    style={{ border: "1px solid transparent" }}
+                  ></div>
                 ))}
+                {/* Days of the month */}
                 {Array.from({ length: days }, (_, i) => (
                   <Day key={i} day={i + 1} colors={colors} />
                 ))}
@@ -141,12 +159,27 @@ function Calendar({ legend, year }) {
         })}
       </div>
 
+      {/* Legend */}
       <div style={{ marginTop: "30px" }}>
         <h3>Legend</h3>
         <ul>
           {colors.slice(1).map((color, i) => (
-            <li key={i} style={{ display: "flex", alignItems: "center", margin: "5px 0" }}>
-              <div style={{ width: "20px", height: "20px", backgroundColor: color, marginRight: "10px" }}></div>
+            <li
+              key={i}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                margin: "5px 0",
+              }}
+            >
+              <div
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  backgroundColor: color,
+                  marginRight: "10px",
+                }}
+              ></div>
               <span>{legend[i] || `Event ${i + 1}`}</span>
             </li>
           ))}
