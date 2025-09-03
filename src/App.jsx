@@ -126,7 +126,7 @@ function Calendar({ legend, year }) {
                   gap: "2px",
                 }}
               >
-                {["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map((day) => (
+                {["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map((day) => (
                   <div key={day} style={{ fontWeight: "bold", textAlign: "center" }}>{day}</div>
                 ))}
                 {Array.from({ length: startDay }).map((_, i) => (
