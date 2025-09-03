@@ -1,0 +1,102 @@
+/* General */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Sign-in page */
+.signin-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #007bff;
+}
+
+.signin-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.signin-box input {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+}
+
+.signin-box button {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.signin-box button:hover {
+  background: #0056b3;
+}
+
+/* Calendar layout */
+.calendar-container {
+  padding: 20px;
+}
+
+.year-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.year-nav button {
+  margin: 0 10px;
+}
+
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.month {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.month h3 {
+  text-align: center;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.day {
+  border: 1px solid #ddd;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.day.selected {
+  background: #ffcc00;
+}
+
+/* Legend */
+.legend {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Admin menu */
+.admin-panel {
+  margin: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+}
